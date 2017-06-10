@@ -8,7 +8,7 @@ Simple Nodejs Server to subscribe to a group of mqtt topics and serve the receiv
 ## How to 
 
 ### Download 
-    ```bash
+    ```shell
     cd /opt/
     sudo git clone https://github.com/udaygin/mqtt2rest.git
     sudo chown -R $USER:$USER mqtt2rest
