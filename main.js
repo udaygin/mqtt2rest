@@ -21,24 +21,25 @@ var db = new JsonDB(database_name, true, true);
 var mqtt = require('mqtt')
 var client  = mqtt.connect('mqtt://'+ mqtt)
 
-//subscribe to all child topics of a given prefix  
+console.log('subscribe to all child topics of a given prefix ='+mqtt_topic_prefix); 
 client.on('connect', function () {
-  client.subscribe(mqtt_topic_prefix+'#');
+	client.subscribe(mqtt_topic_prefix+'#');
 })
  
 //when the message arrives, save it data db file 
 client.on('message', function (topic, message) {
-  //cleanup the message data 	
-  var message_data = (message instanceof Buffer)? message.toString():message;	
-  message_data = message_data.trim().replace(/\n$/, '');
+	//cleanup the message data 	
+	var message_data = (message instanceof Buffer)? message.toString():message;	
+	message_data = message_data.trim().replace(/\n$/, '');
 
-  console.log('Got message on topic '+topic,message_data);
-  //filter topics that are not relavant   
-  if(topic.startsWith(mqtt_topic_prefix)){
-	console.log('append it to existing data');
-	
-	db.push(topic+'[]',message_data);
-  }
+	console.log('Got message on topic '+ topic,message_data);
+	//filter topics that are not relavant   
+	if(topic.startsWith(mqtt_topic_prefix)){
+		console.log('append it to existing data');
+		db.push(topic+'[]',message_data);
+	}else{
+		console.log('not a topic that I am supposed to monitor. ignoring');
+	}
 })
 
 //---------Create rest endpoint to serve json data ------ 
