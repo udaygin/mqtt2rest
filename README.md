@@ -1,5 +1,5 @@
 # mqtt2rest (Work in Progress)
-Simple Nodejs Server to subscribe to a group of mqtt topics and serve the received data as json over http
+Simple Nodejs Server to subscribe to a group of mqtt topics on a given mqtt broker and serve the received data as json over http
 
 **Warning :** This autostarting service capabilities fo the project are desingend for linux(Ubuntu systemd) only. rest of the code should work fine even on windows. 
 
@@ -16,7 +16,7 @@ Simple Nodejs Server to subscribe to a group of mqtt topics and serve the receiv
 ### Installation 
 
 #### Background service installation 
-_Note : skip this service installation section if you just want to run it manually from command line _
+_Note : skip this service installation section if you just want to run it manually from command line_
 
 Edit username to match yours(or any other user that you want to run this as )
   ```shell
@@ -54,16 +54,17 @@ Replace values of properties under [mqtt] section in file /opt/mqtt2rest/config.
 ##### Configure mqtt topics to watch
 
 Edit the value of property **topic.prefix** under [mqtt] section to match your topic prefix 
-For Ex: if you have topics 
+For Ex: if you have below topics for devices in your home
   * /devices/livingroom/speakers
   * /devices/livingroom/thermostat
   * /devices/bedroom/thermostat
   * /devices/bedroom/smartlight
   * /devices/kitchen/eggtray
-and if you want to monitor all the devices in all rooms , your topic.prefix should be "/devices/" Note: don't forget the trailing slash 
-on the other hand, if you want only bedroom devices to be monitored your topic.prefix should be "/devices/bedroom/" Note: don't forget the trailing slash 
+and if you want to monitor all the devices in all rooms , your topic.prefix should be "/devices/" 
+_Note: don't forget the trailing slash_ 
+on the other hand, if you want only bedroom devices to be monitored your topic.prefix should be "/devices/bedroom/" 
+_Note: don't forget the trailing slash_ 
   
-
 ##### Configure port to start the server on 
 
 By default, this script starts the http server on port 3000. you can change it by editing 
