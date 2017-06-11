@@ -47,7 +47,9 @@ client.on('message', function (topic, message) {
 //---------Create rest endpoint to serve json data ------ 
 
 const express = require('express');
+var compression = require('compression');
 const app = express();
+app.use(compression());
 
 app.get('*', (req, res) => {
 	//extract the path from request url 

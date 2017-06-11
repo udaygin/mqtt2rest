@@ -58,4 +58,4 @@ typings/
 .env
 
 # datafile 
-mqttdata.json
+*data.json
