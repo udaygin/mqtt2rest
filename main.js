@@ -49,7 +49,10 @@ client.on('message', function (topic, message) {
 const express = require('express');
 var compression = require('compression');
 const app = express();
+var cors = require('cors')
 app.use(compression());
+app.use(cors())
+app.options('*', cors()) 
 
 app.get('*', (req, res) => {
 	//extract the path from request url 
